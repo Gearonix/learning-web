@@ -1,0 +1,12 @@
+{
+  "name": "web-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "apis/file-api.js",
+  "scripts": {
+    "start": "npx live-server . --port=3000 --no-browser"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

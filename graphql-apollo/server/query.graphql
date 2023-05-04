@@ -1,0 +1,5 @@
+query{
+    getPost(id : "post1673435619054"){
+        title
+    }
+}

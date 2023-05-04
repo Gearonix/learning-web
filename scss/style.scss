@@ -1,0 +1,34 @@
+@use 'params.scss' as *;
+
+@import 'blocks/articles.scss';
+@import 'blocks/header.scss';
+@import 'blocks/get_started.scss';
+
+h1,h2,h3,h4,h5,h6{
+	font-family: 'DM Serif Display', serif;
+}
+p,span, a{
+	font-family: 'Jost', sans-serif;
+}
+button{
+	cursor: pointer;
+	outline: none;
+	border: none;
+}
+
+.container{
+	@include size(78%);
+	margin: $center;
+	border-left: $border $light-grey;
+	border-right: $border $light-grey;
+}
+.grey-lines{
+	@include absolute();
+	@include size(400px);
+	border-left: $border $light-grey;
+	border-right: $border $light-grey;
+	right: 0;
+	margin: 0 auto;
+}
+
+

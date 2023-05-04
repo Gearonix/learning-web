@@ -1,0 +1,11 @@
+@mixin doq{
+  font-size: 28px;
+}
+
+
+
+
+h1{
+  @include doq;
+  color: red;
+}

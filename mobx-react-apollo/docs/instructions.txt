@@ -1,0 +1,11 @@
+https://stackoverflow.com/questions/67799148/
+how-to-combine-multiple-stores-as-root-store-in-mobx-and-get-access-of-in-each-o
+
+https://dev.to/ivandotv/mobx-root-store-pattern-with-react-hooks-318d
+
+https://blog.logrocket.com/using-mobx-for-large-scale-enterprise-state-management/
+
+
+
+mobx objects proxy
+https://stackoverflow.com/questions/64081012/react-mobx-store-return-proxy-object

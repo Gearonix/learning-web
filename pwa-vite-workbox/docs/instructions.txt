@@ -1,0 +1,17 @@
+https://habr.com/ru/companies/macloud/articles/563684/
+
+registerRoute(
+  ({ url }) => url.origin === 'https://hacker-news.firebaseio.com',
+  new CacheFirst({
+    cacheName: 'stories',
+    plugins: [
+      new ExpirationPlugin({
+        maxEntries: 50,
+        maxAgeSeconds: 5 * 60 // 5 минут
+      }),
+      new CacheableResponsePlugin({
+        statuses: [0, 200]
+      })
+    ]
+  })
+)

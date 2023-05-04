@@ -1,0 +1,31 @@
+@use "../params.scss" as *;
+.header{
+	@include size(100%,151px);
+	border: $brd;
+	display: flex;
+	align-items: center;
+	&__inner{
+		@include size(100%,50px);
+		border: $brd;
+		display: flex;
+		justify-content: space-between;
+		& > *{
+			height: 100%;
+		}
+		
+		
+	}
+	&__logo img{
+			@include size(177px);
+	}	
+	&__nav{
+		width: 50%;
+		border: $brd;
+		display: flex;
+		justify-content: space-around;
+		align-items: center;
+		a{
+			@include inlineStyles($h5,$grey);
+		}
+	}
+}

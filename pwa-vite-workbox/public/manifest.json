@@ -1,0 +1,22 @@
+{
+  "name": "test",
+  "short_name": "test",
+  "theme_color": "#2196f3",
+  "background_color": "#2196f3",
+  "scope": "/",
+  "start_url": ".",
+  "display": "standalone",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/logo192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/logo512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

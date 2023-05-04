@@ -1,0 +1,28 @@
+@use "../params.scss" as *;
+
+.get-started{
+	@include backgroundImage('source/img/Image.png');
+	@include size(100%,758px);
+	border-radius: 20px;
+	display: flex;
+	align-items: center;
+	&__inner{
+		@include size(434px,342px);
+		border: $brd;
+		margin-left: 49px;
+	}
+	&__title{
+		@include inlineStyles(65px);
+		line-height: 125%;
+	}
+	&__subtitle{
+		@include inlineStyles();
+		margin-top: 10px;
+	}
+	&__button{
+		@include size(220px,75px);
+		@include inlineStyles($h4,$white);
+		background: $black;
+		border-radius: 18px;
+	}
+}

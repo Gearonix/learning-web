@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer components{
+   .container{
+       @apply bg-red-400;
+       @apply w-[100%];
+       @apply m-0;
+   }
+}

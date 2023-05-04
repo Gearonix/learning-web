@@ -1,0 +1,27 @@
+@use "../params.scss" as *;
+
+.articles{
+	display: flex;
+	align-items: center;
+	height: 625px;
+	&__item{
+		height: 358px;
+		text-align: center;
+		border: $brd;
+	}
+	&__title{
+		@include inlineStyles($h3);
+		margin-top: 40px
+;	}
+	&__subtitle{
+		@include inlineStyles($h4,$grey);
+		margin: $center;
+		width: 75%;
+		margin-top: 15px;
+		margin-bottom: 52px;
+	}
+	&__read-more{
+		@include inlineStyles($h5, $black, bold);
+	}
+
+}

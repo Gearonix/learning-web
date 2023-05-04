@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>object</title>
+    <style>
+        body {
+            width: 100vw;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+        main {
+            width: 100vw;
+            height: 200vw;
+            z-index: 99;
+            position: absolute;
+            justify-content: center;
+            text-align: center;
+            pointer-events: none;
+            font-size: 5vh;
+        }
+    </style>
+</head>
+<body>
+<main>
+    <h1>hello</h1>
+</main>
+    <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.148.0/build/three.module.js",
+      "GLTFloader" : "https://threejs.org/examples/jsm/loaders/GLTFLoader.js",
+      "orbitControls" : "https://threejs.org/examples/jsm/controls/OrbitControls.js"
+    }
+  }
+</script>
+<script src="domEvents.js" type="module"></script>
+    <script type="module" src="text.js"></script>
+</body>
+</html>

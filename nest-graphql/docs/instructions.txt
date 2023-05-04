@@ -1,0 +1,21 @@
+PRISMA GUIDE
+
+https://www.youtube.com/watch?v=YoSl5sx-uUU&ab_channel=PurpleSchool%7CAntonLarichev
+
+
+model User {
+  id        Int      @default(autoincrement()) @id
+  email     String   @unique
+  password  String
+  name      String   @db.VarChar(50)
+  bio       String   @db.Text
+}
+
+
+GRAPHQL GUIDE
+
+"@nestjs/apollo": "^11.0.5",
+"@apollo/server": "4.7.0",
+
+should be in dev dependencies
+

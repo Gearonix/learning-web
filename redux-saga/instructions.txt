@@ -1,0 +1,14 @@
+usage with @reduxjs-toolkit:
+
+counter.js
+store.js
+
+basic redux instructions:
+
+redux/sagas/index.js
+
+if you want to do server request so run server.js 6868 localhost
+
+https://saga-slice.github.io/docs/getting-started saga-slice library
+https://stackoverflow.com/questions/45081717/how-can-i-test-thunk-actions-with-jest thunk jest
+https://mistryakshar54.medium.com/testing-redux-thunk-actions-using-jest-da17c97824bb redux mock store redux thunk
