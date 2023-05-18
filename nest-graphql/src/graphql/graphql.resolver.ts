@@ -46,7 +46,7 @@ export class GraphqlResolver {
   @Mutation((returns) => Boolean)
   async sendMessage(@Args('test') test: string) {
     const role = await this.findRoles(2);
-    pubSub.publish('commentAdded', {commentAdded: role});
+    pubSub.publish('commentAdded', { commentAdded: role });
     return true;
   }
 }

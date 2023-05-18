@@ -1,4 +1,4 @@
-import {BadRequestException, ValidationError } from '@nestjs/common';
+import { BadRequestException, ValidationError } from '@nestjs/common';
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
