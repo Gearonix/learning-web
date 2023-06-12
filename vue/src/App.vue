@@ -28,18 +28,23 @@
       dialog222
     </p>
   </Dialog>
-  <h3>{{ sortedPosts }}</h3>
+  <h3 :class="{
+    red: isShow
+  }">{{ sortedPosts }}</h3>
+  <div v-intersection>directive-testing</div>
 
 </template>
 
-<script>
+<script lang="ts">
+
 import PostForm from './components/PostForm.vue';
 import Button from './components/Button.vue';
 import Input from './components/Input.vue';
 import Post from './components/Post.vue';
 import Dialog from './components/Dialog.vue';
+import {defineComponent} from 'vue'
 
-export default {
+export default defineComponent({
   components: {
     PostForm,
     Button,
@@ -96,6 +101,12 @@ export default {
     },
     likes(newVal){
       console.log('likes', newVal)
+    },
+    obj : {
+      handler(newVal, oldval) {
+        console.log(newVal)
+      },
+      deep: true
     }
   },
   computed: {
@@ -104,12 +115,15 @@ export default {
     }
   },
   name: 'App'
-}
+})
 </script>
 
 <style>
   body{
     color: #383838;
+  }
+  .red{
+    color: red;
   }
   .list-enter-active,
   .list-leave-active {

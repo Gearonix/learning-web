@@ -7,25 +7,13 @@
 </template>
 
 <script>
+import toggleMixin from '../mixins/toggleMixin.ts'
+
 export default {
   name: 'Dialog',
-  props: {
-    isShow: {
-      type: Boolean,
-      default: false
-    }
-  },
-  methods: {
-    showDialog(){
-      this.$emit('close')
-    }
-  },
-  mounted() {
-    console.log('dialog mounted')
-  },
-  unmounted() {
-    console.log('dialog unmounted')
-  }
+  mixins: [
+      toggleMixin
+  ]
 }
 </script>
 

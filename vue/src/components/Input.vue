@@ -2,9 +2,11 @@
   <input :value="modelValue" @input="updateValue">
 </template>
 
-<script>
+<script lang="ts">
 
-export default {
+import {defineComponent} from 'vue'
+
+export default defineComponent({
   name: 'Input',
   emits: [
       'update:modelValue'
@@ -15,7 +17,7 @@ export default {
       this.$emit('update:modelValue', e.target.value)
     }
   }
-}
+})
 </script>
 
 <style scoped>

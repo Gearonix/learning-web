@@ -4,7 +4,10 @@
 
 <script>
 export default {
-  name: 'About'
+  name: 'About',
+  mounted() {
+    console.log(this.$router.push('/not_found'))
+  }
 }
 </script>
 
