@@ -5,8 +5,14 @@
 </template>
 
 <script>
+import {inject} from 'vue'
+
 export default {
-  name: 'Button'
+  name: 'Button',
+  setup(){
+    const message = inject('message')
+    console.log(message)
+  }
 }
 </script>
 

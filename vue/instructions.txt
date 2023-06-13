@@ -1,0 +1,9 @@
+how to use <script setup> with Vuex:
+
+https://stackoverflow.com/questions/64010072/how-to-use-vuex-mapgetters-with-vue-3-sfc-script-setup-syntax
+
+
+
+guide:
+
+https://youtu.be/XzLuMtDelGk

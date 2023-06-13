@@ -42,7 +42,7 @@ import Button from './components/Button.vue';
 import Input from './components/Input.vue';
 import Post from './components/Post.vue';
 import Dialog from './components/Dialog.vue';
-import {defineComponent} from 'vue'
+import {provide, defineComponent} from 'vue'
 
 export default defineComponent({
   components: {
@@ -51,6 +51,9 @@ export default defineComponent({
     Input,
     Post,
     Dialog
+  },
+  setup(){
+    provide('message', 'provide_test')
   },
   data(){
     return {
