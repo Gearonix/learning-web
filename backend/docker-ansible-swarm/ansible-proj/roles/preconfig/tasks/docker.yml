@@ -1,0 +1,78 @@
+---
+- name: docker installation
+  become: true
+  block:
+    - name: install universe
+      ansible.builtin.apt_repository:
+        repo: > 
+          deb http://archive.ubuntu.com/ubuntu 
+          {{ ansible_distribution_release }} 
+          universe
+        state: present
+        update_cache: true
+
+    - name: install extra packages
+      ansible.builtin.apt:
+        name:
+          - ca-certificates
+          - curl
+          - gnupg
+        update_cache: true
+        state: present
+        cache_valid_time: 800
+
+    - name: create keyrings dir if not exist
+      ansible.builtin.file:
+        path: /etc/apt/keyrings
+        state: directory
+
+    - name: add docker key
+      ansible.builtin.apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+        keyring: /etc/apt/keyrings/docker.gpg
+
+    - name: set permisions to docker key
+      ansible.builtin.file:
+        path: /etc/apt/keyrings/docker.gpg
+        mode: "0644"
+
+    
+    - name: create docker.list if not exist
+      ansible.builtin.file:
+        path: /etc/apt/sources.list.d/docker.list
+        state: touch
+
+    - name: add docker repository to sources.list.d
+      ansible.builtin.lineinfile:
+        path: /etc/apt/sources.list.d/docker.list
+        line: >
+          deb [arch="{{ dpkg_arch }}"  
+          signed-by=/etc/apt/keyrings/docker.gpg]  
+          https://download.docker.com/linux/ubuntu  
+          {{ ansible_lsb.codename }} stable
+      
+    - name: update cache
+      ansible.builtin.apt:
+        update_cache: true
+
+    - name: installing docker packages
+      block:
+        - name: installing docker packages
+          ansible.builtin.apt:
+            name:
+              - docker-ce
+              - docker-ce-cli
+              - containerd.io
+              - docker-buildx-plugin
+              - docker-compose-plugin
+            state: present
+            update_cache: true
+
+    - name: completing the installation and rebooting
+      block:
+        - name: add user to group
+          ansible.builtin.user:
+            name: "{{ ansible_user }}"
+            groups: docker
+            append: true

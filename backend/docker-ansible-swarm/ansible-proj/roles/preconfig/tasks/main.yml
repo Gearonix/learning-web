@@ -1,0 +1,13 @@
+---
+- name: task - preconfig
+  tags: preconfig
+  block:      
+    - name: docker installation and preconfiguring
+      include_tasks: docker.yml
+
+    - name: installing additional packages
+      include_tasks: misc.yml
+
+    # use handlers here
+    - name: system reboot
+      include_tasks: reboot.yml

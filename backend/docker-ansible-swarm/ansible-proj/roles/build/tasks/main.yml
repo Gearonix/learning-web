@@ -1,0 +1,75 @@
+---
+- name: "building docker images"
+  tags: build
+  block:
+    # rewrite to delegate_to!!
+
+    - name: creating registry folder
+      ansible.builtin.file:
+        path: $HOME/registry
+        state: directory
+      become: true
+
+    - name: adding registry tag to root node
+      community.docker.docker_node:
+        hostname: "{{ ansible_hostname }}"
+        labels:
+          registry: "true"
+
+    - name: "creating local registry {{ registry_url }}"
+      community.docker.docker_swarm_service:
+        name: registry
+        image: registry
+        state: present
+        mounts:
+          - source: "{{ ansible_env.HOME }}/registry"
+            target: /var/lib/registry
+            type: bind
+        env:
+          REGISTRY_HTTP_ADDR: 0.0.0.0:5000
+        placement:
+          constraints:
+            - node.labels.registry==true
+        publish:
+          - mode: host
+            protocol: tcp
+            published_port: 5000
+            target_port: 5000
+
+
+    - name: add github ssh key
+      copy: >
+        src=files/github_key
+        dest=$HOME/.ssh/id_rsa
+        mode=0600
+
+    - name: configure ssh to use ansible key for github.com
+      copy: >
+        src=files/github_hosts
+        dest=$HOME/.ssh/config
+        mode=0644
+
+    - name: cloning git repository
+      ansible.builtin.git: >
+        repo=git@github.com:Gearonix/docker-ansible-learn.git
+        key_file=$HOME/.ssh/id_rsa
+        dest=$HOME/docker/source
+        
+
+    - name: "building image and pushing to local {{ registry_url }} registry"
+      community.docker.docker_image:
+        name: "{{ registry_url }}/{{ item.name }}"
+        tag: "{{ item.version }}"
+        force_source: true
+        force_tag: true
+        push: true
+        build:
+          path: "{{ git_folder }}/docker-demo"
+          dockerfile: "{{ git_folder }}/docker-demo/apps/{{ item.name }}/Dockerfile"
+        source: build
+      loop: "{{ services | selectattr('build', 'equalto', true) | list }}"
+
+    - name: "removing git repository"
+      file:
+        path: "{{ git_folder }}"
+        state: absent

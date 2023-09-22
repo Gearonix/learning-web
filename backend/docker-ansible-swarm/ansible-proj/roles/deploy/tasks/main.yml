@@ -1,0 +1,15 @@
+---
+- name: task - deploy
+  tags: deploy
+  block:
+    - name: "creating root docker network [{{ root_network }}]"
+      community.docker.docker_network:
+        name: "{{ root_network }}"
+        driver: overlay
+        state: present
+
+    - name: deploying services
+      include_tasks: "../services/{{ item.name }}/service.yml"
+      vars:
+        service: "{{ item }}"
+      loop: "{{ services }}"

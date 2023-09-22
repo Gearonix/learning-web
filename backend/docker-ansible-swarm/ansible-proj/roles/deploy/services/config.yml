@@ -1,0 +1,15 @@
+---
+- name: "configuring docker config [{{ service.name }}]"
+  tags: "{{ service.name }}"
+  block:
+    - name: "creating new config [{{ service.name }}]"
+      include_tasks: create-config.yml
+
+  rescue:
+    - name: (docker config err) removing old service
+      community.docker.docker_swarm_service:
+        name: "{{ service.name }}"
+        state: absent
+
+    - name: "creating new config [{{ service.name }}]"
+      include_tasks: create-config.yml

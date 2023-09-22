@@ -1,0 +1,5 @@
+---
+- name: system reboot
+  become: true
+  when: not skip_optional
+  ansible.builtin.reboot:

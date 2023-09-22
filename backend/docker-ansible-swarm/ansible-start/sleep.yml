@@ -1,0 +1,26 @@
+---
+- name: sleep
+  hosts: demo
+  tasks:
+    - name: gp.config
+      block:
+        - name: ts.sleep
+          command: /bin/sleep 15
+          async: 1000
+          poll: 0
+          register: sleep
+        - name: ts.echo
+          command: echo "SLEEP"
+          register: echo
+        - debug:
+            msg: "{{ echo.stdout_lines }}"
+        - name: ts.sleep['listener']
+          async_status:
+            jid: "{{ sleep.ansible_job_id }}"
+          register: job_result
+          until: job_result.finished
+          retries: 1000
+          delay: 1
+        - debug:
+           msg: "{{ job_result }}"
+      become: true

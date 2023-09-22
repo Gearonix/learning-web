@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  main:    
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+    - 3000:3000
+    restart: always
+    container_name: dcr-demo-4
+    volumes:
+    - data:/opt/app/data
+
+volumes:
+  data:

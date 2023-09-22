@@ -1,0 +1,54 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./apps/app/Dockerfile
+    restart: always
+    container_name: app
+    ports:
+    - 3001:80
+    networks:
+    - myNetwork
+    # extends:
+    #   file: docker-compose.api.yml
+    #   service: api
+  converter:
+    build:
+      context: .
+      dockerfile: ./apps/converter/Dockerfile
+    restart: always
+    container_name: converter
+    networks:
+    - myNetwork
+    volumes:
+    - ./.env:/opt/app/.env
+    depends_on:
+    - rmq
+  api: 
+    build:
+      context: .
+      dockerfile: ./apps/api/Dockerfile
+    restart: always
+    container_name: api
+    networks:
+    - myNetwork
+    ports:
+    - 3002:3000
+    volumes:
+    - ./.env:/opt/app/.env
+    depends_on:
+    - rmq
+  rmq:
+    image: rabbitmq:3-management
+    restart: always
+    container_name: rmq
+    networks:
+    - myNetwork
+    env_file: .env
+
+
+networks:
+  myNetwork:
+    driver: bridge

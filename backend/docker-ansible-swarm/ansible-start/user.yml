@@ -1,0 +1,43 @@
+---
+- name: user
+  hosts: demo
+  # any_errors_fatal: false
+  # vars_files:
+    # - group_vars/demo/vars.yml
+  vars_prompt:
+    - name: create_user_state
+      prompt: 'usr state'
+      private: no
+  tasks:
+    - name: gp.config
+      block:    
+      - name: ts.create-usr
+        when: ansible_facts['distribution'] == 'Ubuntu'
+        # vars:
+          # USER_NAME: grnx_ans
+        # ignore_errors: true
+        user:
+          name: "{{ USER_NAME }}"
+          state: "{{ create_user_state }}"
+        # debugger: always
+        register: runtime_error
+
+      - name: ts.install-curl
+        apt:
+          name: curl
+          update-cache: yes
+        register: runtime_error
+      become: true
+
+      rescue:
+      - name: err [gp.config]
+        debug:
+          var: runtime_error
+
+      always:
+        - name: log [gp.config]
+          debug:
+            msg: "always be logged"
+       # - debug:
+          # msg: "{{ inventory }}"
+# ansible -i hosts.ini -m user -a "name=grnx_ans-2 state=present" demo

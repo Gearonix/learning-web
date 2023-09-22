@@ -1,0 +1,5 @@
+---
+# ansible-lint --write .
+skip_list:
+  - name[casing]
+  - yaml[new-line-at-end-of-file]

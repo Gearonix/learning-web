@@ -1,0 +1,23 @@
+---
+- name: "[{{ service.name }}] service"
+  tags: "{{ service.name }}"
+  block:
+    - name: creating docker secret
+      include_tasks: ../secret.yml
+
+    - name: "deploying service [{{ service.name }}]"
+      community.docker.docker_swarm_service:
+        name: "{{ service.name }}"
+        image: "{{ registry_url }}/{{ service.name }}:{{ service.version }}"
+        state: present
+        force_update: true
+        publish:
+          - mode: ingress
+            protocol: tcp
+            published_port: 3002
+            target_port: 3000
+        secrets:
+          - secret_name: "{{ service.name }}.env"
+            filename: /opt/app/.env
+        networks:
+          - name: "{{ root_network }}"

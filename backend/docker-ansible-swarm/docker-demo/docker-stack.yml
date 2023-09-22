@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  api: 
+    image: localhost:5000/api:latest
+    restart: always
+    secrets:
+    - source: api.env
+      target: /opt/app/.env
+    networks:
+    - myNetwork
+    ports:
+    - 3002:3000
+    depends_on:
+    - rmq
+  rmq:
+    image: rabbitmq:3-management
+    restart: always
+    networks:
+    - myNetwork
+    secrets:
+    - source: api.env
+      target: /opt/app/.env
+    # env_file: - docker stack not supports it
+    environment:
+    - RABBITMQ_DEFAULT_USER=admin 
+    - RABBITMQ_DEFAULT_PASS=admin
+
+
+networks:
+  myNetwork:
+    driver: overlay
+
+
+secrets:
+  api.env:
+    external: true

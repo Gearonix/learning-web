@@ -1,0 +1,4 @@
+collections:
+  - name: community.docker
+  
+# ansible-galaxy install -r

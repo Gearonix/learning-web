@@ -1,0 +1,26 @@
+---
+- name: entrypoint (all)
+  hosts: all
+  roles:
+    - preconfig
+
+- name:  entrypoint (root)
+  hosts: root
+  roles:
+    - role: swarm_init
+    - role: build
+    - role: deploy
+
+- name:  entrypoint (managers)
+  hosts: managers
+  roles:
+     - role: swarm_join
+       type: manager
+
+- name:  entrypoint (workers)
+  hosts: workers
+#  pre_tasks - learn about it
+  roles:
+     - role: swarm_join
+       type: worker
+#  post_tasks

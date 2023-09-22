@@ -1,0 +1,30 @@
+---
+- name: initializing swarm
+  tags: swarm_init
+  block:
+    - name: initializing new swarm cluster
+      community.docker.docker_swarm:
+        state: present
+        advertise_addr: 10.11.10.1
+      register: swarm_token
+
+    - name: saving tokens
+      ansible.builtin.set_fact:
+        token_manager: "{{ swarm_token.swarm_facts.JoinTokens.Manager }}"
+        token_worker: "{{ swarm_token.swarm_facts.JoinTokens.Worker }}"
+        cacheable: true
+      
+
+    - name: saving swarm manager token
+      ansible.builtin.copy:
+        module: ansible.builtin.copy
+        dest: ./roles/swarm_init/files/token-manager
+        content: "{{ swarm_token.swarm_facts.JoinTokens.Manager }}"
+      delegate_to: localhost
+
+    - name: saving swarm worker token
+      ansible.builtin.copy:
+        module: ansible.builtin.copy
+        dest: ./roles/swarm_init/files/token-worker
+        content: "{{ swarm_token.swarm_facts.JoinTokens.Worker }}"
+      delegate_to: localhost

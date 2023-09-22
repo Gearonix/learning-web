@@ -1,0 +1,26 @@
+---
+- name: "[{{ service.name }}] service"
+  tags: "{{ service.name }}"
+  block:
+    - name: creating docker config
+      include_tasks: ../config.yml
+      loop:
+        - nginx.conf
+      loop_control:
+        loop_var: config_item
+
+    - name: "deploying service [{{ service.name }}]"
+      community.docker.docker_swarm_service:
+        name: "{{ service.name }}"
+        image: "nginx:{{ service.version }}"
+        state: present
+        publish:
+          - mode: ingress
+            protocol: tcp
+            published_port: 80
+            target_port: 80
+        configs:
+          - config_name: nginx.conf
+            filename: /etc/nginx/nginx.conf
+        networks:
+          - name: "{{ root_network }}"

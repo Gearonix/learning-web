@@ -1,0 +1,38 @@
+---
+rmq_defaults:
+  - name: AMQP_EXCHANGE
+    value: xchg_integrations
+  - name: AMQP_USER
+    value: "{{rmq.user}}"
+  - name: AMQP_PASSWORD
+    value: "{{rmq.password}}"
+  - name: AMQP_HOSTNAME
+    value: rmq
+
+services:
+  - name: api
+    version: latest
+    build: true
+  - name: converter
+    version: latest
+    build: true
+  - name: app
+    version: latest
+    build: true
+  - name: rmq
+    version: 3-management
+    build: false
+  - name: nginx
+    version: latest
+    build: false
+
+configs:
+  converter:
+    queue: q_imageProcessor
+
+advertise_addr: 10.11.10.1
+
+hostnames:
+  root: server-1
+
+registry_url: localhost:5000
