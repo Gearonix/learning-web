@@ -4,7 +4,7 @@
   "description": "",
   "main": "apis/file-api.js",
   "scripts": {
-    "start": "npx live-server . --port=3000 --no-browser"
+    "start": "npx live-server . --port=7666 --no-browser"
   },
   "keywords": [],
   "author": "",
