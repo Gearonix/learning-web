@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../src/index.css", "../src/style.css", "../src/Test.scss"],
-  "sourcesContent": ["* {\r\n    color: red;\r\n}\r\n", "button{\r\n    color: green;\r\n}\r\n", "button{\r\n  color: pink;\r\n}\r\n"],
-  "mappings": "AAAA,EACI,UCDJ,OACI,YCDJ,OACE",
-  "names": []
-}
